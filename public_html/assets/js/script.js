@@ -2,31 +2,31 @@ const jsonPath = 'assets/json/data.json';
 
 // Fetch JSON file
 const calldata = async () => {
-    return new Promise((resolve) => {
-        fetch(jsonPath)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                resolve(data);
-            });
-    })
+  return new Promise((resolve) => {
+    fetch(jsonPath)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        resolve(data);
+      });
+  })
 };
 // const data = await calldata();
 
 // add realworldproject
 const realworldproject = async () => {
-    try {
-        // const data = await calldata();
-        const projectElement = document.querySelector("#project");
-        const projectContainers = projectElement.querySelector(".container");
-        const projectRow = projectContainers.querySelector(".row");
+  try {
+    // const data = await calldata();
+    const projectElement = document.querySelector("#project");
+    const projectContainers = projectElement.querySelector(".container");
+    const projectRow = projectContainers.querySelector(".row");
 
-        const addElement = data.realworldproject.map((objData) => {
-            return `<div class="col-md-6 col-lg-3 mb-2">
+    const addElement = data.realworldproject.map((objData) => {
+      return `<div class="col-md-6 col-lg-3 mb-2">
                     <a href="https://rapidapi.com/asusalman986/api/games-details">
                     <div class="project-card">
                         <div class="body">
@@ -37,26 +37,26 @@ const realworldproject = async () => {
                     </div>
                 </a>
                 </div>`;
-        });
-        projectRow.innerHTML = addElement.json("");
+    });
+    projectRow.innerHTML = addElement.json("");
 
-    }
-    catch (error) {
-        return;
-    }
+  }
+  catch (error) {
+    return;
+  }
 }
 // realworldproject();
 
 // add blog
 const blog = async () => {
-    try {
-        // const data = await calldata();
-        const blogElement = document.querySelector("#blog");
-        const blogContainers = blogElement.querySelector(".container");
-        const blogRow = blogContainers.querySelector(".row");
+  try {
+    // const data = await calldata();
+    const blogElement = document.querySelector("#blog");
+    const blogContainers = blogElement.querySelector(".container");
+    const blogRow = blogContainers.querySelector(".row");
 
-        const addElement = data.blog.map((objData) => {
-            return ` <div class="col-md-4">
+    const addElement = data.blog.map((objData) => {
+      return ` <div class="col-md-4">
               <div class="card border mb-4">
                 <img
                   src="assets/imgs/folio-1.jpg"
@@ -81,11 +81,70 @@ const blog = async () => {
                 </div>
               </div>
             </div>`;
-        });
-        blogRow.innerHTML = addElement.json("");
-    }
-    catch (error) {
-        return;
-    }
+    });
+    blogRow.innerHTML = addElement.json("");
+  }
+  catch (error) {
+    return;
+  }
 }
 // blog();
+
+// skill tab
+document.addEventListener("DOMContentLoaded", function () {
+    const tabButtons = document.querySelectorAll(".nav-pills .nav-link");
+    const tabPanes = document.querySelectorAll(".tab-content .tab-pane");
+
+    tabButtons.forEach(button => {
+        button.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            // Remove active class from all buttons
+            tabButtons.forEach(btn => btn.classList.remove("active"));
+            // Add active class to the clicked button
+            this.classList.add("active");
+
+            // Hide all tab panes
+            tabPanes.forEach(pane => {
+                pane.classList.remove("active", "show");
+            });
+
+            // Show the selected tab pane
+            const target = this.getAttribute("href");
+            const targetPane = document.querySelector(target);
+            if (targetPane) {
+                targetPane.classList.add("active", "show");
+            }
+        });
+    });
+});
+
+// // jquery
+// (function ($) {
+//   "use strict";
+
+//   // Smooth scrolling on the navbar links
+//   $(".navbar-nav a").on('click', function (event) {
+//     if (this.hash !== "") {
+//       event.preventDefault();
+
+//       $('html, body').animate({
+//         scrollTop: $(this.hash).offset().top - 45
+//       }, 1500, 'easeInOutExpo');
+
+//       if ($(this).parents('.navbar-nav').length) {
+//         $('.navbar-nav .active').removeClass('active');
+//         $(this).closest('a').addClass('active');
+//       }
+//     }
+//   });
+
+//   // Skills
+//   $('.skill').waypoint(function () {
+//     $('.progress .progress-bar').each(function () {
+//       $(this).css("width", $(this).attr("aria-valuenow") + '%');
+//     });
+//   }, { offset: '80%' });
+
+
+// })(jQuery);
